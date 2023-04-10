@@ -115,7 +115,7 @@ class Chatbot:
             ],
             "conversation_id": conversation_id,
             "parent_message_id": parent_id or str(uuid.uuid4()),
-            "model": "text-davinci-002-render",
+            "model": "gpt-3.5-turbo",
         }
         new_conv = data["conversation_id"] is None
         self.conversation_id_prev_queue.append(
@@ -184,7 +184,7 @@ class Chatbot:
     def gen_title(self, id, message_id):
         url = BASE_URL + f"backend-api/conversation/gen_title/{id}"
         response = self.session.post(url, data=json.dumps(
-            {"message_id": message_id, "model": "text-davinci-002-render"}))
+            {"message_id": message_id, "model": "gpt-3.5-turbo"}))
         self.check_response(response)
         data = json.loads(response.text)
         return data
